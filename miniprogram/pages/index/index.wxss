@@ -1,0 +1,142 @@
+page{
+  background-color: #f0f0f0;
+}
+
+.no-lists{
+  padding-top: 120rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+}
+
+.list-model{
+  height: 320rpx;
+  font-size: 0;
+}
+.list-model .title-view{
+  position: relative;
+}
+.title-view .title {
+  display: inline-block;
+  width: 600rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding-top: 40rpx;
+  padding-bottom: 30rpx;
+  padding-left: 30rpx;
+  font-size: 40rpx;
+  font-weight: 400;
+  color: #fff;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.title-view .notifications{
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.last-view {
+  position: relative;
+  font-size: 32rpx;
+  text-align: center;
+  height: 150rpx;
+  color: #fff;
+}
+.last-view .left-text {
+  position: absolute;
+  left: 30rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+}
+.last-view .right-text {
+  position: absolute;
+  right: 30rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+}
+.last-view .center-text {
+  height: 150rpx;
+  line-height: 150rpx;
+  font-size: 88rpx;
+}
+
+.invite-view{
+  position: relative;
+  top: -12rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 24rpx;
+  color: #fff;
+  padding-right: 30rpx;
+}
+.invite-view .invite-number{
+  margin-right: 10rpx;
+}
+.invite-view .invite-icon{
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 19rpx;
+  vertical-align: top;
+  margin-right: 6rpx;
+}
+.invite-view .invite-other{
+  font-size: 30rpx;
+}
+
+.add-view {
+  position: fixed;
+  left: 0rpx;
+  bottom: 30rpx;
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+}
+.add-btn{
+  width: 128rpx;
+  height: 128rpx;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  background-color: #ee5e7b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn::after{
+  border: none;
+}
+
+.add-btn .add-image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.invite-btn-view{
+  position: relative;
+  top: -15rpx;
+  padding-right: 30rpx;
+}
+
+.invite-btn{
+  position: absolute;
+  right: 30rpx;
+  width: 250rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #333;
+  border-radius: 25rpx;
+  padding: 0;
+  text-align: center;
+  background-color: #fff;
+}
+
+.invite-btn::after{
+  border: none;
+}

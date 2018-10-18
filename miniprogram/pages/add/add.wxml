@@ -1,0 +1,41 @@
+<view>
+  <!-- 倒数日主题 -->
+  <view class="title-view">
+    <input class="title-input" bindinput="bindTitle" placeholder="输入倒数日主题" auto-focus/>
+  </view>
+  <!-- 倒数日日期 -->
+  <view class="date-view">
+    <picker mode="date" value="{{date}}" start="{{date}}" bindchange="bindDateChange">
+      <view class="picker">
+        <text class="date-title">日期: </text>
+        <view>
+          <text class="date-text">{{date}}</text>
+          <image class="next-image" mode="aspectFill" src="../../images/next.png"></image>
+        </view>
+      </view>
+    </picker>
+  </view>
+  <!-- 倒数周期 -->
+  <view class="period-view">
+    <picker bindchange="bindLastPeriodChange" value="{{periodIndex}}" range="{{periodArr}}">
+      <view class="picker">
+        <text class="date-title">倒数周期: </text>
+        <view>
+          <text class="date-text">{{periodArr[periodIndex]}}</text>
+          <image class="next-image" mode="aspectFill" src="../../images/next.png"></image>
+        </view>
+      </view>
+    </picker>
+  </view>
+  <!-- 备注 -->
+  <view class="des-view">
+    <view class="des-title"><text>备注</text></view>
+    <view class="des">
+      <textarea class="des-textarea" bindinput="bindDes" auto-height placeholder="输入备注说明" />
+    </view>
+  </view>
+  <!-- 按钮 -->
+  <view class="button-view">
+    <button class="save-btn" type="default" size="default" bindtap="saveDays" hover-class="other-button-hover">保 存</button>
+  </view>
+</view>

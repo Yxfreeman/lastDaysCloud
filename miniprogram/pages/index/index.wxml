@@ -1,0 +1,36 @@
+<view>
+  <!-- 无数据展示 -->
+  <view class="no-lists" wx:if="{{!listData&&listData.length==0}}">
+    <text>空空如也\n去创建一个日子开始倒数吧</text>
+  </view>
+  <!--列表展示-->
+  <view class="lists" wx:if="{{listData}}">
+    <view class="list-model" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}">
+      <view class="title-view">
+        <text class="title">{{item.title}}</text>
+        <image class="notifications" mode="aspectFill" src="../../images/ic_notifications_none.png"></image>
+      </view>
+      <view class="last-view">
+        <text class="left-text">还有</text>
+        <text class="center-text">{{item.lastDays}}</text>
+        <text class="right-text">天</text>
+      </view>
+      <view class="invite-view" wx:if="{{item.inviteNumber}}">
+        <text class="invite-number">{{item.inviteNumber}}人</text>
+        <view class="invite-icons" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
+          <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl}}"></image>
+        </view>
+        <text class="invite-other">···</text>
+      </view>
+      <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
+        <view class="invite-btn" bindtap="inviteTap" hover-class="other-button-hover">邀请朋友一起倒数</view>
+      </view>
+    </view>
+  </view>
+  <!-- 添加按钮 -->
+  <view class="add-view">
+    <button class="add-btn" bindtap="toAdd">
+      <image class="add-image" mode="aspectFill" src="../../images/add.png"></image>
+    </button>
+  </view>
+</view>

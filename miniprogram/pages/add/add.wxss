@@ -1,0 +1,58 @@
+.title-view {
+  padding: 30rpx 30rpx 50rpx;
+}
+.title-view .title-input {
+  font-size: 32rpx;
+  border-bottom: 1px solid #f0f0f0;
+  height: 80rpx;
+  color: #333;
+}
+
+.date-view,.period-view{
+  padding: 0 30rpx;
+  font-size: 32rpx;
+  height: 90rpx;
+}
+
+.date-view .picker,.period-view .picker{
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-view .next-image,.period-view .next-image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 20rpx;
+}
+
+.des-view {
+  padding: 0 30rpx;
+  font-size: 32rpx;
+}
+
+.des-view .des-title {
+  margin-bottom: 30rpx;
+}
+
+.des-view .des{
+  min-height: 160rpx;
+}
+
+.des-view .des .des-textarea{
+  font-size: 32rpx;
+  width: 690rpx;
+  color: #333;
+}
+
+.button-view{
+  margin-top: 30rpx;
+}
+
+.button-view .save-btn{
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background: #f04848;
+  padding: 0;
+}
