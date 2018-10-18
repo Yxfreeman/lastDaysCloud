@@ -1,0 +1,37 @@
+.picker-banner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80rpx;
+}
+
+.side-des{
+  width: 200rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.picker-view{
+  width: 100rpx;
+  height: 300rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.right-des{
+  text-align: right;
+}
+
+.button-view{
+  margin-top: 30rpx;
+}
+
+.button-view .ok-btn{
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background: #f04848;
+  padding: 0;
+}

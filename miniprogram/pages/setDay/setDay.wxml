@@ -1,0 +1,15 @@
+<view>
+  <view class="picker-banner">
+    <view class="side-des"><text>提前</text></view>
+    <picker-view class="picker-view" indicator-style="height: 50px;" value="{{value}}">
+      <picker-view-column>
+        <view wx:key="{{index}}" wx:for="{{days}}" style="line-height: 50px">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="side-des right-des"><text>天提醒</text></view>
+  </view>
+  <!-- 按钮 -->
+  <view class="button-view">
+    <button class="ok-btn" type="default" size="default" bindtap="okTap" hover-class="other-button-hover">确 定</button>
+  </view>
+</view>

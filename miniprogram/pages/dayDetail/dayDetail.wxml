@@ -1,0 +1,29 @@
+<view>
+  <!--列表展示-->
+  <view class="lists" wx:if="{{dayDetail}}" style="background-color: {{backgroundColorArr[dayDetail.index%9]}}">
+    <view class="list-model" >
+      <view class="title-view">
+        <text class="title">{{dayDetail.title}}</text>
+        <image class="notifications" mode="aspectFill" bindtap="toSetDay" src="../../images/ic_notifications_none.png"></image>
+      </view>
+      <view class="last-view" bindtap="toDayDetail">
+        <text class="left-text">还有</text>
+        <text class="center-text">{{dayDetail.lastDays}}</text>
+        <text class="right-text">天</text>
+      </view>
+      <view class="des-view">
+        <text>{{dayDetail.des}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="invite-view" wx:if="{{dayDetail.inviteNumber}}">
+    <view class="invite-number"><text>{{dayDetail.inviteNumber}}人一起倒数</text></view>
+    <view class="invite-icons">
+      <image wx:key="index" wx:for="{{dayDetail.persons}}" wx:for-item="person" class="invite-icon" mode="aspectFill" src="{{person.avatarUrl}}"></image>
+    </view>    
+  </view>
+  <!-- 添加按钮 -->
+  <view class="invite-btn-view">
+        <button style="background-color: {{backgroundColorArr[dayDetail.index%9]}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
+    </view>
+</view>

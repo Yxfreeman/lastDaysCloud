@@ -1,8 +1,11 @@
 {
   "cloud": true,
   "pages": [
+    "pages/sharePage/sharePage",
     "pages/index/index",
     "pages/add/add",
+    "pages/dayDetail/dayDetail",
+    "pages/setDay/setDay",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",

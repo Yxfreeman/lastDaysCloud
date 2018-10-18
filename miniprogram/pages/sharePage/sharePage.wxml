@@ -1,0 +1,25 @@
+<view>
+  <view>
+    <image></image>
+    <text>小贝贝</text>
+    <text>分享的倒数日</text>
+  </view>
+  <view>
+    <text>我的生日</text>
+  </view>
+  <view>
+    <text>还有</text>
+    <text>88</text>
+    <text>天</text>
+  </view>
+  <view>
+    <view><text>1999人一起倒数</text></view>
+    <view>
+    <image></image>
+    </view>
+  </view>
+  <view>
+    <button>加入倒数日</button>
+    <button>创建倒数日</button>
+  </view>
+</view>

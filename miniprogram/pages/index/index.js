@@ -7,13 +7,15 @@ Page({
    */
   data: {
     listData: null,
-    backgroundColorArr: ['rgb(240, 95, 141)', 'rgb(249, 127, 121)', 'rgb(252, 190, 66)', 'rgb(177, 141, 220)', 'rgb(61, 201, 135)', 'rgb(67, 193, 201)', 'rgb(78, 177, 243)', 'rgb(148, 127, 120)', 'rgb(130, 169, 218)']
+    backgroundColorArr: ['rgb(240, 95, 141)', 'rgb(249, 127, 121)', 'rgb(252, 190, 66)', 'rgb(177, 141, 220)', 'rgb(61, 201, 135)', 'rgb(67, 193, 201)', 'rgb(78, 177, 243)', 'rgb(130, 169, 218)', 'rgb(148, 127, 120)']
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.startPullDownRefresh();
+    this.getLists();
   },
 
   /**
@@ -27,8 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.startPullDownRefresh();
-    this.getLists();
+    
   },
 
   /**
@@ -62,8 +63,30 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: '倒数日',
+        path: '/pages/sharePage/sharePage?id=' + res.target.id,
+        success: function (res) {
+          // 转发成功
+          wx.showToast({
+            title: '转发成功',
+            icon: 'success',
+            duration: 2000
+          })
+        },
+        fail: function (res) {
+          // 转发失败
+          wx.showToast({
+            title: '转发失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    }
   },
 
   /**
@@ -112,7 +135,9 @@ Page({
           }
         });
         this.setData({
-          listData: listsData
+          listData: listsData.sort(function (a, b) {
+            return a.lastDays - b.lastDays;
+          })
         });
       }
     }).catch((err) => {
@@ -120,6 +145,30 @@ Page({
         icon: "none",
         title: err
       });
+    });
+  },
+
+  /**
+   * 到倒数提醒页面
+   */
+  toSetDay: function () {
+    wx.navigateTo({
+      url: '../setDay/setDay'
+    });
+  },
+
+  /**
+   * 到详情页面
+   */
+  toDayDetail: function (event) {
+    let detail = {...event.currentTarget.dataset.detail};
+    detail.index = event.currentTarget.dataset.index;
+    wx.setStorage({
+      key: 'dayDetail',
+      data: detail
+    });
+    wx.navigateTo({
+      url: '../dayDetail/dayDetail'
     });
   }
 })

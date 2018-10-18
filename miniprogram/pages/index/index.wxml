@@ -6,24 +6,24 @@
   <!--列表展示-->
   <view class="lists" wx:if="{{listData}}">
     <view class="list-model" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}">
-      <view class="title-view">
+      <view class="title-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
         <text class="title">{{item.title}}</text>
-        <image class="notifications" mode="aspectFill" src="../../images/ic_notifications_none.png"></image>
+        <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image>
       </view>
-      <view class="last-view">
+      <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
         <text class="left-text">还有</text>
         <text class="center-text">{{item.lastDays}}</text>
         <text class="right-text">天</text>
       </view>
       <view class="invite-view" wx:if="{{item.inviteNumber}}">
         <text class="invite-number">{{item.inviteNumber}}人</text>
-        <view class="invite-icons" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
+        <view class="invite-icons" wx:if="{{index<8}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
           <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl}}"></image>
         </view>
         <text class="invite-other">···</text>
       </view>
       <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
-        <view class="invite-btn" bindtap="inviteTap" hover-class="other-button-hover">邀请朋友一起倒数</view>
+        <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
       </view>
     </view>
   </view>
