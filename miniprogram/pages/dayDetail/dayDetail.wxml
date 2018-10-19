@@ -19,7 +19,7 @@
   <view class="invite-view" wx:if="{{dayDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dayDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">
-      <image wx:key="index" wx:for="{{dayDetail.persons}}" wx:for-item="person" class="invite-icon" mode="aspectFill" src="{{person.avatarUrl}}"></image>
+      <image wx:if="{{dayDetail.openid != person.openid}}"  wx:key="index" wx:for="{{dayDetail.persons}}" wx:for-item="person" class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle1.png'}}"></image>
     </view>    
   </view>
   <!-- 添加按钮 -->

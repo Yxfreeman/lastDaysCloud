@@ -10,7 +10,7 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
-    return await db.collection('dateLists').add({
+    const dayRes = await db.collection('dateLists').add({
       // data 字段表示需新增的 JSON 数据
       data: {
         openid: event.userInfo.openId,
@@ -20,6 +20,17 @@ exports.main = async (event, context) => {
         des: event.des,
         createNickname: event.createNickname,
         createAvatarUrl: event.createAvatarUrl,
+        createTime: db.serverDate(),
+        parentID: event.parentID ? event.parentID : ''
+      }
+    });
+    return await db.collection('jionUsers').add({
+      // data 字段表示需新增的 JSON 数据
+      data: {
+        openid: event.userInfo.openId,
+        listID: event.parentID ? event.parentID : dayRes._id,
+        nickname: event.createNickname,
+        avatarUrl: event.createAvatarUrl,
         createTime: db.serverDate()
       }
     })

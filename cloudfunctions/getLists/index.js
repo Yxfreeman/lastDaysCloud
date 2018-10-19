@@ -12,10 +12,11 @@ exports.main = async (event, context) => {
   try {
     let dataLists = await db.collection('dateLists').where({
       openid: event.userInfo.openId
-    }).orderBy('createTime', 'desc').limit(100).get();
+    }).limit(100).get();
     for (let i = 0; i < dataLists.data.length; i++) {
-       const personsData = await db.collection('jionUsers').where({
-        listID: dataLists.data[i]._id
+      const parentID = dataLists.data[i].parentID;
+      const personsData = await db.collection('jionUsers').where({
+        listID: parentID ? parentID : dataLists.data[i]._id
       }).limit(100).get();
       dataLists.data[i].persons = personsData.data;
     }

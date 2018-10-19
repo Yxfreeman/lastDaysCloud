@@ -16,13 +16,14 @@ Page({
     periodArr: ["年", "月"],
     // 说明
     des: "",
+    fromPage: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({fromPage: options.from});
   },
 
   /**
@@ -110,6 +111,15 @@ Page({
     });
   },
 
+
+  /**
+   * 获取用户信息
+   */
+  onGotUserInfo: function (res) {
+    app.globalData.personInfo = res.detail.userInfo;
+    this.saveDays();
+  },
+
   /**
    * 保存数据
    */
@@ -140,20 +150,34 @@ Page({
         wx.showToast({
           icon: "success",
           title: "保存成功",
-          success: function () {
-            // 1秒后返回
-            that.timer = setTimeout(() => {
-              wx.navigateBack({
-                delta: 1
+          success: () => {
+            if (this.data.fromPage === "share") {
+              // 1秒后返回
+              that.timer = setTimeout(() => {
+                wx.reLaunch({
+                  url: "../index/index"
+                });
+              }, 1000);
+            } else {
+              // 1秒后返回
+              wx.setStorage({
+                key: 'back',
+                data: 'addPage'
               });
-            }, 1000);
+              that.timer = setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1
+                });
+              }, 1000);
+            }
           }
         });
       }
     }).catch((err) => {
+      console.log(err)
       wx.showToast({
         icon: "none",
-        title: err
+        title: "错误"
       });
     });
   }

@@ -36,6 +36,6 @@
   </view>
   <!-- 按钮 -->
   <view class="button-view">
-    <button class="save-btn" type="default" size="default" bindtap="saveDays" hover-class="other-button-hover">保 存</button>
+    <button class="save-btn" type="default" size="default" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" hover-class="other-button-hover">保 存</button>
   </view>
 </view>

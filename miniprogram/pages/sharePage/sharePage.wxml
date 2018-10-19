@@ -1,25 +1,26 @@
-<view>
-  <view>
-    <image></image>
-    <text>小贝贝</text>
-    <text>分享的倒数日</text>
+<view wx:if="{{dataDetail}}">
+  <view class="from-view">
+    <image class="from-icon" mode="aspectFill" src="{{dataDetail.createAvatarUrl?dataDetail.createAvatarUrl:'../../images/ic_account_circle.png'}}"></image>
+    <text class="from-name">{{dataDetail.createNickname}}</text>
+    <text class="from-des">分享的倒数日</text>
   </view>
-  <view>
-    <text>我的生日</text>
+  <view class="title-view">
+    <text>{{dataDetail.title}}</text>
   </view>
-  <view>
-    <text>还有</text>
-    <text>88</text>
-    <text>天</text>
+  <view class="last-view">
+    <text class="left-text">还有</text>
+    <text class="center-text">{{dataDetail.lastDays}}</text>
+    <text class="right-text">天</text>
   </view>
-  <view>
-    <view><text>1999人一起倒数</text></view>
-    <view>
-    <image></image>
+  <view class="invite-view" wx:if="{{dataDetail.inviteNumber}}">
+    <view class="invite-number"><text>{{dataDetail.inviteNumber}}人一起倒数</text></view>
+    <view class="invite-icons">
+      <image wx:if="{{dataDetail.openid != person.openid}}"  wx:key="index" wx:for="{{dataDetail.persons}}" wx:for-item="person" class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle1.png'}}"></image>
     </view>
   </view>
-  <view>
-    <button>加入倒数日</button>
-    <button>创建倒数日</button>
+  <view class="buttons-view">
+    <button wx:if="{{!dataDetail.isJoin}}" class="join-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">加入倒数</button>
+    <button class="join-btn" wx:if="{{dataDetail.isJoin}}">已加入</button>
+    <button class="add-btn" bindtap="toAdd">创建倒数日</button>
   </view>
 </view>

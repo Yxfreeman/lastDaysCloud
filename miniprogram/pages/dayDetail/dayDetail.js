@@ -18,7 +18,6 @@ Page({
       key: 'dayDetail',
       success: (res) => {
         this.setData({dayDetail: res.data});
-        console.log(res.data);
       }
     })
   },
@@ -71,7 +70,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '倒数日',
-      path: '/pages/sharePage/sharePage?id=' + this.data.dayDetail._id,
+      path: '/pages/sharePage/sharePage?dayID=' + this.data.dayDetail._id,
       success: function (res) {
         // 转发成功
         wx.showToast({

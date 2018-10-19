@@ -1,3 +1,105 @@
 Page{
   background-color: rgb(243, 166, 150);
+  color: #fff;
+  font-size: 0rpx;
+}
+
+.from-view{
+  display: flex;
+  align-items: center;
+  padding: 40rpx 30rpx;
+}
+
+.from-view .from-icon{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+}
+
+.from-view .from-name, .from-view .from-des {
+  display: inline-block;
+  font-size: 32rpx;
+}
+
+.from-view .from-name{
+  margin: 0 20rpx;
+}
+
+.title-view{
+  font-size: 40rpx;
+  padding: 60rpx 30rpx 140rpx;
+  text-align: center
+}
+
+.last-view {
+  position: relative;
+  font-size: 32rpx;
+  text-align: center;
+  height: 150rpx;
+  color: #fff;
+}
+.last-view .left-text {
+  position: absolute;
+  left: 30rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+}
+.last-view .right-text {
+  position: absolute;
+  right: 30rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+}
+.last-view .center-text {
+  height: 150rpx;
+  line-height: 150rpx;
+  font-size: 88rpx;
+}
+
+.invite-view{
+  font-size: 28rpx;
+  color: #fff;
+}
+.invite-view .invite-number{
+ padding: 100rpx 30rpx 0;
+ text-align: center;
+}
+.invite-view .invite-icons{
+  text-align: center;
+  padding: 30rpx 0 30rpx 30rpx;
+}
+.invite-view .invite-icon{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+}
+
+.buttons-view{
+  position: fixed;
+  left: 0;
+  bottom: 80rpx;
+  width: 750rpx;
+  text-align: center;
+}
+
+.buttons-view button{
+  width: 260rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 32rpx;
+  background-color: #fff;
+  color: #333;
+  border-radius: 40rpx;
+}
+
+.buttons-view button::after{
+  border: none;
+}
+.join-btn {
+  position: relative;
+  bottom: 30rpx;
+
 }

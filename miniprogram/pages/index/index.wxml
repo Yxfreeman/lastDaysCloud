@@ -1,6 +1,6 @@
 <view>
   <!-- 无数据展示 -->
-  <view class="no-lists" wx:if="{{!listData&&listData.length==0}}">
+  <view class="no-lists" wx:if="{{!listData||listData.length==0}}">
     <text>空空如也\n去创建一个日子开始倒数吧</text>
   </view>
   <!--列表展示-->
@@ -17,8 +17,8 @@
       </view>
       <view class="invite-view" wx:if="{{item.inviteNumber}}">
         <text class="invite-number">{{item.inviteNumber}}人</text>
-        <view class="invite-icons" wx:if="{{index<8}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
-          <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl}}"></image>
+        <view class="invite-icons" wx:if="{{index<8 && item.openid != person.openid}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
+          <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle.png'}}"></image>
         </view>
         <text class="invite-other">···</text>
       </view>

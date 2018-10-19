@@ -82,9 +82,6 @@ page{
   vertical-align: top;
   margin-right: 20rpx;
 }
-.invite-view .invite-other{
-  font-size: 30rpx;
-}
 
 .invite-btn-view {
   position: fixed;

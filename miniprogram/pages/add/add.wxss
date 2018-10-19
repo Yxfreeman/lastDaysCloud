@@ -53,6 +53,6 @@
   height: 80rpx;
   line-height: 80rpx;
   color: #fff;
-  background: #f04848;
+  background: #ee5e7b;
   padding: 0;
 }

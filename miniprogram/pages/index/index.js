@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function (options) {
     wx.startPullDownRefresh();
-    this.getLists();
   },
 
   /**
@@ -29,7 +28,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    //读取缓存登录
+    wx.getStorage({
+      key: 'back',
+      success: (res) => {
+        if (res.data === 'addPage') {
+          wx.startPullDownRefresh();
+          wx.removeStorage({ key: 'back'});
+        }
+      }
+    })
   },
 
   /**
@@ -68,7 +76,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: '倒数日',
-        path: '/pages/sharePage/sharePage?id=' + res.target.id,
+        path: '/pages/sharePage/sharePage?dayID=' + res.target.id,
         success: function (res) {
           // 转发成功
           wx.showToast({
@@ -94,7 +102,7 @@ Page({
    */
   toAdd: function () {
     wx.navigateTo({
-      url: '../add/add'
+      url: '../add/add?from=home'
     });
   },
   
@@ -110,7 +118,7 @@ Page({
         wx.stopPullDownRefresh();
         let listsData = [...res.result.data];
         listsData.forEach((item, index) => {
-          item.inviteNumber = item.persons.length;
+          item.inviteNumber = item.persons.length - 1;
           const curDateTime = new Date();
           const curYear = curDateTime.getFullYear();
           const curMon = curDateTime.getMonth() + 1;
@@ -143,7 +151,7 @@ Page({
     }).catch((err) => {
       wx.showToast({
         icon: "none",
-        title: err
+        title: "错误"
       });
     });
   },
