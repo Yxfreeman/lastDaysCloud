@@ -11,7 +11,8 @@ const db = cloud.database();
 exports.main = async (event, context) => {
   try {
     let dataLists = await db.collection('dateLists').where({
-      openid: event.userInfo.openId
+      openid: event.userInfo.openId,
+      isDelete: 0
     }).limit(100).get();
     for (let i = 0; i < dataLists.data.length; i++) {
       const parentID = dataLists.data[i].parentID;

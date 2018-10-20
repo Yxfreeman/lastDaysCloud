@@ -10,9 +10,44 @@ page{
 }
 
 .list-model{
+  width: 750rpx;
   height: 320rpx;
   font-size: 0;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
 }
+.list-content{
+  width: 750rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(160rpx);
+  transform: translateX(160rpx);
+  margin-left: -160rpx;
+}
+.delete-view{
+  width: 160rpx;
+  height: 320rpx;
+  background-color: #fff;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(160rpx);
+  transform: translateX(160rpx);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-icon{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.touch-move-active .list-content,.touch-move-active .delete-view {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
 .list-model .title-view{
   position: relative;
 }
@@ -130,7 +165,7 @@ page{
   height: 50rpx;
   line-height: 50rpx;
   font-size: 24rpx;
-  color: #333;
+  color: #666;
   border-radius: 25rpx;
   padding: 0;
   text-align: center;

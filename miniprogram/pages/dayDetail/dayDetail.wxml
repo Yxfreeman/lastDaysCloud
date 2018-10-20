@@ -4,7 +4,7 @@
     <view class="list-model" >
       <view class="title-view">
         <text class="title">{{dayDetail.title}}</text>
-        <image class="notifications" mode="aspectFill" bindtap="toSetDay" src="../../images/ic_notifications_none.png"></image>
+        <!-- <image class="notifications" mode="aspectFill" bindtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
       </view>
       <view class="last-view" bindtap="toDayDetail">
         <text class="left-text">还有</text>
@@ -16,6 +16,7 @@
       </view>
     </view>
   </view>
+  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber}}"><text class="no-invite">暂无一起倒数的人员\n赶紧邀请好友加入参与倒数吧！</text></view>
   <view class="invite-view" wx:if="{{dayDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dayDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">

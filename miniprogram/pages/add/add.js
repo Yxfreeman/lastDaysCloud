@@ -69,13 +69,6 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * 主题
    */
   bindTitle: function (e) {

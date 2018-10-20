@@ -10,7 +10,6 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
-    console.log(event.id);
     let data = await db.collection('dateLists').doc(event.id).get();
     const parentID = data.data.parentID;
     const personsData = await db.collection('jionUsers').where({

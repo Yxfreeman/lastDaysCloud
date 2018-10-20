@@ -18,6 +18,14 @@ Page{
 
 .from-view .from-name, .from-view .from-des {
   display: inline-block;
+  font-size: 28rpx;
+}
+
+.from-view .from-name{
+  max-width: 360rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   font-size: 32rpx;
 }
 
@@ -27,8 +35,15 @@ Page{
 
 .title-view{
   font-size: 40rpx;
-  padding: 60rpx 30rpx 140rpx;
+  padding: 60rpx 30rpx 80rpx;
   text-align: center
+}
+
+.des-view{
+  padding: 80rpx 30rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
 }
 
 .last-view {
@@ -57,7 +72,7 @@ Page{
 }
 
 .invite-view{
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: #fff;
 }
 .invite-view .invite-number{
@@ -69,10 +84,20 @@ Page{
   padding: 30rpx 0 30rpx 30rpx;
 }
 .invite-view .invite-icon{
-  width: 40rpx;
-  height: 40rpx;
-  border-radius: 20rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
   margin-right: 20rpx;
+}
+
+.no-invite-view {
+  padding: 80rpx 30rpx;
+  color: #fff;
+  text-align: center;
+}
+.no-invite{
+  font-size: 32rpx;
+  line-height: 50rpx;
 }
 
 .buttons-view{
@@ -101,5 +126,9 @@ Page{
 .join-btn {
   position: relative;
   bottom: 30rpx;
+}
 
+.join-btn .home-icon{
+  width: 32rpx;
+  height: 32rpx;
 }

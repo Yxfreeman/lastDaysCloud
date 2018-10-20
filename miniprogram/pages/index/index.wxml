@@ -5,10 +5,11 @@
   </view>
   <!--列表展示-->
   <view class="lists" wx:if="{{listData}}">
-    <view class="list-model" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}">
+    <view class="list-model {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+    <view class="list-content">
       <view class="title-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
         <text class="title">{{item.title}}</text>
-        <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image>
+        <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
       </view>
       <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
         <text class="left-text">还有</text>
@@ -25,6 +26,10 @@
       <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
         <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
       </view>
+    </view>
+    <view class="delete-view" data-id="{{item._id}}" catchtap="deleteTap">
+      <image class="delete-icon" mode="aspectFill" src="../../images/delete.png"></image>
+    </view>
     </view>
   </view>
   <!-- 添加按钮 -->

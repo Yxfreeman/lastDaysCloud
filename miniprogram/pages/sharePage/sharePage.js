@@ -140,7 +140,12 @@ Page({
           icon: "success",
           title: "保存成功",
           success: () => {
-            this.getData();
+            // 1秒后返回
+            that.timer = setTimeout(() => {
+              wx.reLaunch({
+                url: "../index/index"
+              });
+            }, 1000);
           }
         });
       }
@@ -158,5 +163,14 @@ Page({
   onGotUserInfo: function (res) {
     app.globalData.personInfo = res.detail.userInfo;
     this.saveDays();
+  },
+
+  /**
+   * 回到主页
+   */
+  toHome: function () {
+    wx.reLaunch({
+      url: "../index/index"
+    });
   }
 })

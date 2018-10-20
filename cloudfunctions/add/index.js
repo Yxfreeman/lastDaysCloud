@@ -21,7 +21,8 @@ exports.main = async (event, context) => {
         createNickname: event.createNickname,
         createAvatarUrl: event.createAvatarUrl,
         createTime: db.serverDate(),
-        parentID: event.parentID ? event.parentID : ''
+        parentID: event.parentID ? event.parentID : '',
+        isDelete: 0
       }
     });
     return await db.collection('jionUsers').add({

@@ -42,6 +42,17 @@ App({
     //   console.log('[云函数] [login] 获取 openid 失败，请检查是否有部署云函数，错误信息：', err)
     // })
   },
+  getNavHeight: function () {
+    // 获取手机系统信息
+    wx.getSystemInfo({
+      success: res => {
+        //导航高度
+        this.globalData.navHeight = res.statusBarHeight + 46;
+      }, fail(err) {
+        console.log(err);
+      }
+    });
+  },
   onLaunch: function () {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -51,6 +62,7 @@ App({
         traceUser: true,
       });
       this.getInfo();
+      // this.getNavHeight();
     }
 
     this.globalData = {}
