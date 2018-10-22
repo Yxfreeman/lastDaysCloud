@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: 'lastdays-d18b8c'
+  env: 'product-ff8906'
 });
 
 const db = cloud.database();
@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
     });
     return await db.collection('jionUsers').where({
       openid: event.userInfo.openId,
-      listID: event.id
+      listID: event.parentID ? event.parentID : event.id
     }).remove();
   } catch (e) {
     console.error(e)

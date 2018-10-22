@@ -1,7 +1,7 @@
 <view wx:if="{{dataDetail}}">
   <view class="from-view">
     <image class="from-icon" mode="aspectFill" src="{{dataDetail.createAvatarUrl?dataDetail.createAvatarUrl:'../../images/ic_account_circle.png'}}"></image>
-    <text class="from-name">{{dataDetail.createNickname}}1111111111111111111</text>
+    <text class="from-name">{{dataDetail.createNickname}}</text>
     <text class="from-des">分享的倒数日</text>
   </view>
   <view class="title-view">

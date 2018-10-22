@@ -131,7 +131,7 @@ Page({
         des: dataDetail.des,
         createNickname: personInfo.nickName,
         createAvatarUrl: personInfo.avatarUrl,
-        parentID: this.data.listID
+        parentID: dataDetail.parentID ? dataDetail.parentID : this.data.listID
       }
     }).then((res) => {
       if (res.result.errMsg === "collection.add:ok") {

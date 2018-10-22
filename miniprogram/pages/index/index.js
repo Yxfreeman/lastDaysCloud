@@ -88,12 +88,6 @@ Page({
           })
         },
         fail: function (res) {
-          // 转发失败
-          wx.showToast({
-            title: '转发失败',
-            icon: 'none',
-            duration: 2000
-          })
         }
       }
     }
@@ -170,7 +164,7 @@ Page({
       confirmColor: "#999",
       success: (res) => {
         if (res.confirm) {
-          this.confirmDelete(event.currentTarget.dataset.id);
+          this.confirmDelete(event.currentTarget.dataset.id, event.currentTarget.dataset.parentID);
         }
       }
     });
@@ -179,10 +173,10 @@ Page({
   /**
    * 确认删除
    */
-  confirmDelete: function (id) {
+  confirmDelete: function (id, parentID) {
     wx.cloud.callFunction({
       name: "delete",
-      data: { id: id}
+      data: { id: id, parentID: parentID}
     }).then((res) => {
       if (res.result.errMsg === "collection.remove:ok") {
         wx.showToast({

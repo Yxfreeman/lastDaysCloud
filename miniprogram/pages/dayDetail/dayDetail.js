@@ -80,12 +80,6 @@ Page({
         })
       },
       fail: function (res) {
-        // 转发失败
-        wx.showToast({
-          title: '转发失败',
-          icon: 'none',
-          duration: 2000
-        })
       }
     } 
   },
