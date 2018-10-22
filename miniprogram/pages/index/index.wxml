@@ -27,7 +27,7 @@
         <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
       </view>
     </view>
-    <view class="delete-view" data-id="{{item._id}}" data-parentID="{{item.parentID}}"  catchtap="deleteTap">
+    <view class="delete-view" data-id="{{item._id}}" data-parentid="{{item.parentID}}"  catchtap="deleteTap">
       <image class="delete-icon" mode="aspectFill" src="../../images/delete.png"></image>
     </view>
     </view>

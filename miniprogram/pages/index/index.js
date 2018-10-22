@@ -164,7 +164,7 @@ Page({
       confirmColor: "#999",
       success: (res) => {
         if (res.confirm) {
-          this.confirmDelete(event.currentTarget.dataset.id, event.currentTarget.dataset.parentID);
+          this.confirmDelete(event.currentTarget.dataset.id, event.currentTarget.dataset.parentid);
         }
       }
     });
@@ -174,9 +174,10 @@ Page({
    * 确认删除
    */
   confirmDelete: function (id, parentID) {
+    console.log(parentID);
     wx.cloud.callFunction({
       name: "delete",
-      data: { id: id, parentID: parentID}
+      data: { id: id, parentid: parentID}
     }).then((res) => {
       if (res.result.errMsg === "collection.remove:ok") {
         wx.showToast({

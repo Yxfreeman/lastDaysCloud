@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
     });
     return await db.collection('jionUsers').where({
       openid: event.userInfo.openId,
-      listID: event.parentID ? event.parentID : event.id
+      listID: event.parentid ? event.parentid : event.id
     }).remove();
   } catch (e) {
     console.error(e)
