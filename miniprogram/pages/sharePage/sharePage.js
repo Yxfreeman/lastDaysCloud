@@ -84,8 +84,8 @@ Page({
         dataDetail.isJoin = dataDetail.persons.some((item) => dataDetail.curOpenid === item.openid);
         const curDateTime = new Date();
         const curYear = curDateTime.getFullYear();
-        const curMon = curDateTime.getMonth() + 1;
-        const curDay = curDateTime.getDate();
+        const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
+        const curDay = String(curDateTime.getDate()).padStart(2, '0');
         const dateArr = dataDetail.date.split("-");
         if (dataDetail.periodIndex == 0) {
           let compYear = curYear;
@@ -94,7 +94,7 @@ Page({
           } else {
             compYear = curYear + 1;
           }
-          dataDetail.lastDays = parseInt((new Date(`${compYear}-${dateArr[1]}-${dateArr[2]}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+          dataDetail.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
         } else if (dataDetail.periodIndex == 1) {
           let compMon = curMon;
           if (curDay <= dateArr[2]) {
@@ -102,7 +102,8 @@ Page({
           } else {
             compMon = curMon + 1;
           }
-          dataDetail.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2]}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+          compMon = String(compMon).padStart(2, '0');
+          item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
         }
         this.setData({ dataDetail: dataDetail});
       }

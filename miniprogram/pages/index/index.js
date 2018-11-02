@@ -118,8 +118,8 @@ Page({
           item.inviteNumber = item.persons.length - 1;
           const curDateTime = new Date();
           const curYear = curDateTime.getFullYear();
-          const curMon = curDateTime.getMonth() + 1;
-          const curDay = curDateTime.getDate();
+          const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
+          const curDay = String(curDateTime.getDate()).padStart(2, '0');
           const dateArr = item.date.split("-");
           if (item.periodIndex == 0) {
             let compYear = curYear;
@@ -128,7 +128,7 @@ Page({
             } else {
               compYear = curYear + 1;
             }
-            item.lastDays = parseInt((new Date(`${compYear}-${dateArr[1]}-${dateArr[2]}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+            item.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
           } else if (item.periodIndex == 1) {
             let compMon = curMon;
             if (curDay <= dateArr[2]) {
@@ -136,7 +136,8 @@ Page({
             } else {
               compMon = curMon + 1;
             }
-            item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2]}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+            compMon = String(compMon).padStart(2, '0');
+            item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
           }
         });
         this.setData({
@@ -174,7 +175,6 @@ Page({
    * 确认删除
    */
   confirmDelete: function (id, parentID) {
-    console.log(parentID);
     wx.cloud.callFunction({
       name: "delete",
       data: { id: id, parentid: parentID}

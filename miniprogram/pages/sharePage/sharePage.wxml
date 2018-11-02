@@ -25,8 +25,7 @@
   <view class="buttons-view">
     <button wx:if="{{!dataDetail.isJoin}}" class="join-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">加入倒数</button>
     <button class="join-btn" wx:if="{{dataDetail.isJoin}}" bindtap="toHome">
-    已加入 to 
-    <image class="home-icon" mode="aspectFill" src="../../images/home.png"></image>
+      主页
     </button>
     <button class="add-btn" bindtap="toAdd">创建倒数日</button>
   </view>
