@@ -7,7 +7,7 @@
   <view class="date-view">
     <picker mode="date" value="{{date}}" start="{{date}}" bindchange="bindDateChange">
       <view class="picker">
-        <text class="date-title">日期: </text>
+        <text class="date-title">日期：</text>
         <view>
           <text class="date-text">{{date}}</text>
           <image class="next-image" mode="aspectFill" src="../../images/next.png"></image>
@@ -15,14 +15,19 @@
       </view>
     </picker>
   </view>
-  <!-- 倒数周期 -->
-  <view class="period-view">
-    <picker bindchange="bindLastPeriodChange" value="{{periodIndex}}" range="{{periodArr}}">
+  <!-- 重复倒数 -->
+  <view class="repeat-view">
+    <view><text>重复倒数：</text></view>
+    <view><switch class="repeat-btn" color="#555" checked bindchange="switchChange"/></view>
+  </view>
+  <!-- 重复周期 -->
+  <view class="period-view {{isRepeat?'': 'is-norepeat'}}">
+    <picker disabled="{{isRepeat ? false : true}}" bindchange="bindLastPeriodChange" value="{{periodIndex}}" range="{{periodArr}}">
       <view class="picker">
-        <text class="date-title">倒数周期: </text>
+        <text class="date-title">重复周期： </text>
         <view>
           <text class="date-text">{{periodArr[periodIndex]}}</text>
-          <image class="next-image" mode="aspectFill" src="../../images/next.png"></image>
+          <image class="next-image" mode="aspectFill" src="{{isRepeat?'../../images/next.png':'../../images/next1.png'}}"></image>
         </view>
       </view>
     </picker>

@@ -1,5 +1,5 @@
 .title-view {
-  padding: 30rpx 30rpx 50rpx;
+  padding: 30rpx 30rpx;
 }
 .title-view .title-input {
   font-size: 32rpx;
@@ -8,15 +8,27 @@
   color: #333;
 }
 
-.date-view,.period-view{
+.date-view,.period-view,.repeat-view{
   padding: 0 30rpx;
   font-size: 32rpx;
-  height: 90rpx;
+  height: 90rpx; 
+}
+
+.period-view.is-norepeat {
+  color: #ccc;
+}
+
+.repeat-view{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .date-view .picker,.period-view .picker{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 90rpx;
 }
 
 .date-view .next-image,.period-view .next-image {
@@ -31,7 +43,8 @@
 }
 
 .des-view .des-title {
-  margin-bottom: 30rpx;
+  height: 90rpx;
+  line-height: 90rpx;
 }
 
 .des-view .des{
@@ -55,4 +68,20 @@
   color: #fff;
   background: #ee5e7b;
   padding: 0;
+}
+
+/*swtich整体大小及背景色*/
+.wx-switch-input{
+    width:82rpx !important;
+    height:40rpx !important; 
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+    width:78rpx !important;
+    height: 36rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+    width: 36rpx !important;
+    height: 36rpx !important;
 }

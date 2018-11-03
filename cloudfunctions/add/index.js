@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: 'product-ff8906'
+  // env: 'product-ff8906'
 });
 
 const db = cloud.database();
@@ -22,7 +22,8 @@ exports.main = async (event, context) => {
         createAvatarUrl: event.createAvatarUrl,
         createTime: db.serverDate(),
         parentID: event.parentID ? event.parentID : '',
-        isDelete: 0
+        isDelete: 0,
+        isRepeat: event.isRepeat ? event.isRepeat : 0
       }
     });
     return await db.collection('jionUsers').add({

@@ -16,7 +16,9 @@ Page({
     periodArr: ["年", "月"],
     // 说明
     des: "",
-    fromPage: ""
+    fromPage: "",
+    // 默认重复倒数
+    isRepeat: 1
   },
 
   /**
@@ -87,12 +89,23 @@ Page({
   },
 
   /**
+   * 重复倒数
+   */
+  switchChange: function (e) {
+    this.setData({
+      isRepeat: e.detail.value ? 1 : 0
+    });
+  },
+
+  /**
    * 倒数日周期
    */
   bindLastPeriodChange: function (e) {
-    this.setData({
-      periodIndex: e.detail.value
-    });
+    if (this.data.isRepeat) {
+      this.setData({
+        periodIndex: e.detail.value
+      });
+    }
   },
 
   /**
@@ -132,6 +145,7 @@ Page({
       data: {
         title: this.data.title,
         date: this.data.date,
+        isRepeat: this.data.isRepeat,
         periodIndex: this.data.periodIndex,
         des: this.data.des,
         createNickname: personInfo.nickName,
