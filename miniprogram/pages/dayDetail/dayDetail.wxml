@@ -11,12 +11,13 @@
         <text class="center-text">{{dayDetail.lastDays}}</text>
         <text class="right-text">天</text>
       </view>
-      <view class="des-view">
-        <text>{{dayDetail.des}}</text>
+      <view class="des-view" wx:if="{{dayDetail.des}}">
+        <view class="des-center"><text>{{dayDetail.des}}</text></view>
       </view>
+      <view wx:if="{{!dayDetail.isLasted && dayDetail.isStartCreater}}" class="edit-view" bindtap="editTap"><text>编辑</text></view>
     </view>
   </view>
-  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber}}"><text class="no-invite">暂无一起倒数的人员\n赶紧邀请好友加入参与倒数吧！</text></view>
+  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber}}"><text class="no-invite">空空如也\n可以邀请朋友一起来倒数！</text></view>
   <view class="invite-view" wx:if="{{dayDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dayDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">

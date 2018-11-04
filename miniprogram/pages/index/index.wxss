@@ -2,10 +2,76 @@ page{
   background-color: #f0f0f0;
 }
 
-.no-lists{
-  padding-top: 120rpx;
+.nav-view{
+  position: fixed;
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  z-index: 9;
+}
+
+.nav-view-absolute{
+  position: absolute;
+}
+
+.nav-banner{
+  width: 50%;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  font-size: 32rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.nav-banner.active{
+  color: #ee5e7b;
+  font-weight: bold;
+}
+
+.line{
+  position: absolute;
+  left: 128rpx;
+  bottom: 0;
+  width: 120rpx;
+  height: 6rpx;
+  background-color: #ee5e7b;
+  transition: all 0.3s;
+}
+
+.line.active{
+  left: 505rpx;
+}
+
+.lasting-div,.lasted-view{
+  padding-top: 80rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  transition: all 0.3s;
+}
+.lasting-div {
+  transform: translateX(-750rpx);
+}
+
+.lasting-div.active{
+  transform: translateX(0rpx);
+}
+
+.lasted-view{
+  transform: translateX(750rpx);
+}
+
+.lasted-view.active{
+  transform: translateX(0rpx);
+}
+
+.no-lists{
+  padding-top: 170rpx;
+  text-align: center;
+  font-size: 28rpx;
   color: #999;
 }
 
@@ -132,8 +198,8 @@ page{
   justify-content: center;
 }
 .add-btn{
-  width: 128rpx;
-  height: 128rpx;
+  width: 120rpx;
+  height: 120rpx;
   padding: 0;
   margin: 0;
   border-radius: 50%;
@@ -148,8 +214,8 @@ page{
 }
 
 .add-btn .add-image {
-  width: 60rpx;
-  height: 60rpx;
+  width: 56rpx;
+  height: 56rpx;
 }
 
 .invite-btn-view{

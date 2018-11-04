@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    fromPage: null,
     dayDetail: null,
     backgroundColorArr: ['rgb(240, 95, 141)', 'rgb(249, 127, 121)', 'rgb(252, 190, 66)', 'rgb(177, 141, 220)', 'rgb(61, 201, 135)', 'rgb(67, 193, 201)', 'rgb(78, 177, 243)', 'rgb(130, 169, 218)', 'rgb(148, 127, 120)']
   },
@@ -13,13 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //读取缓存登录
-    wx.getStorage({
-      key: 'dayDetail',
-      success: (res) => {
-        this.setData({dayDetail: res.data});
-      }
-    })
+    this.setData({ fromPage: options.from });
   },
 
   /**
@@ -33,7 +28,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //读取缓存登录
+    wx.getStorage({
+      key: 'dayDetail',
+      success: (res) => {
+        this.setData({ dayDetail: res.data });
+      }
+    });
   },
 
   /**
@@ -92,4 +93,13 @@ Page({
       url: '../setDay/setDay'
     });
   },
+
+  /**
+   * 编辑按钮
+   */
+  editTap: function () {
+    wx.navigateTo({
+      url: '../add/add?from=detail'
+    });
+  }
 })

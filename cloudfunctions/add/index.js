@@ -23,7 +23,12 @@ exports.main = async (event, context) => {
         createTime: db.serverDate(),
         parentID: event.parentID ? event.parentID : '',
         isDelete: 0,
-        isRepeat: event.isRepeat ? event.isRepeat : 0
+        // 是否重复倒数，0：不重复倒数，1：重复倒数
+        isRepeat: event.isRepeat ? event.isRepeat : 0,
+        // 是否过期，0：没有过期，1：过期了
+        isLasted: 0,
+        // 是否是初始创建者,0：不是，1：是
+        isStartCreater: event.parentID ? 0 : 1
       }
     });
     return await db.collection('jionUsers').add({

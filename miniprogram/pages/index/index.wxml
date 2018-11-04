@@ -1,35 +1,77 @@
-<view>
-  <!-- 无数据展示 -->
-  <view class="no-lists" wx:if="{{!listData||listData.length==0}}">
-    <text>空空如也\n去创建一个日子开始倒数吧</text>
+<view class="content">
+  <view class="nav-view {{navStyle}}">
+    <view class="nav-banner {{navActive==0?'active':''}}" data-index="0" bindtap="navTap"><text>正在倒数</text></view>
+    <view class="nav-banner {{navActive==1?'active':''}}" data-index="1" bindtap="navTap"><text>回顾往日</text></view>
+    <view class="line  {{navActive==1?'active':''}}"></view>
   </view>
-  <!--列表展示-->
-  <view class="lists" wx:if="{{listData}}">
-    <view class="list-model {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-    <view class="list-content">
-      <view class="title-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
-        <text class="title">{{item.title}}</text>
-        <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
-      </view>
-      <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
-        <text class="left-text">还有</text>
-        <text class="center-text">{{item.lastDays}}</text>
-        <text class="right-text">天</text>
-      </view>
-      <view class="invite-view" wx:if="{{item.inviteNumber}}">
-        <text class="invite-number">{{item.inviteNumber}}人</text>
-        <view class="invite-icons" wx:if="{{index<8 && item.openid != person.openid}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
-          <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle.png'}}"></image>
+  <view class="lasting-div {{navActive==0?'active':''}}">
+    <!-- 无数据展示 -->
+    <view class="no-lists" wx:if="{{!listData|| !lasting}}">
+      <text>空空如也\n去创建一个日子开始倒数吧</text>
+    </view>
+    <!--列表展示-->
+    <view class="lists" wx:if="{{listData}}">
+      <view wx:if="{{!item.isLasted}}" class="list-model {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+      <view class="list-content">
+        <view class="title-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
+          <text class="title">{{item.title}}</text>
+          <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
         </view>
-        <text class="invite-other">···</text>
+        <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
+          <text class="left-text">还有</text>
+          <text class="center-text">{{item.lastDays}}</text>
+          <text class="right-text">天</text>
+        </view>
+        <view class="invite-view" wx:if="{{item.inviteNumber}}">
+          <text class="invite-number">{{item.inviteNumber}}人</text>
+          <view class="invite-icons" wx:if="{{index<8 && item.openid != person.openid}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
+            <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle.png'}}"></image>
+          </view>
+          <text class="invite-other">···</text>
+        </view>
+        <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
+          <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
+        </view>
       </view>
-      <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
-        <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
+      <view class="delete-view" data-id="{{item._id}}" data-parentid="{{item.parentID}}"  catchtap="deleteTap">
+        <image class="delete-icon" mode="aspectFill" src="../../images/delete.png"></image>
+      </view>
       </view>
     </view>
-    <view class="delete-view" data-id="{{item._id}}" data-parentid="{{item.parentID}}"  catchtap="deleteTap">
-      <image class="delete-icon" mode="aspectFill" src="../../images/delete.png"></image>
+  </view>
+  <view class="lasted-view {{navActive==1?'active':''}}">
+   <!-- 无数据展示 -->
+    <view class="no-lists" wx:if="{{!listData|| !lasted}}">
+      <text>空空如也\n日子还在倒数</text>
     </view>
+    <!--列表展示-->
+    <view class="lists" wx:if="{{listData}}">
+      <view wx:if="{{item.isLasted}}" class="list-model {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:key="index" wx:for="{{listData}}" style="background-color: {{backgroundColorArr[index%9]}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+      <view class="list-content">
+        <view class="title-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
+          <text class="title">{{item.title}}</text>
+          <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
+        </view>
+        <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
+          <text class="left-text">共倒数</text>
+          <text class="center-text">{{item.lastDays}}</text>
+          <text class="right-text">天</text>
+        </view>
+        <view class="invite-view" wx:if="{{item.inviteNumber}}">
+          <text class="invite-number">{{item.inviteNumber}}人</text>
+          <view class="invite-icons" wx:if="{{index<8 && item.openid != person.openid}}" wx:key="index" wx:for="{{item.persons}}" wx:for-item="person">
+            <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle.png'}}"></image>
+          </view>
+          <text class="invite-other">···</text>
+        </view>
+        <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
+          <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
+        </view>
+      </view>
+      <view class="delete-view" data-id="{{item._id}}" data-parentid="{{item.parentID}}"  catchtap="deleteTap">
+        <image class="delete-icon" mode="aspectFill" src="../../images/delete.png"></image>
+      </view>
+      </view>
     </view>
   </view>
   <!-- 添加按钮 -->

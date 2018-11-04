@@ -1,11 +1,11 @@
 <view>
   <!-- 倒数日主题 -->
   <view class="title-view">
-    <input class="title-input" bindinput="bindTitle" placeholder="输入倒数日主题" auto-focus/>
+    <input class="title-input" disabled="{{fromPage=='detail'?true: false}}" bindinput="bindTitle" placeholder="输入倒数日主题" auto-focus value="{{title}}"/>
   </view>
   <!-- 倒数日日期 -->
   <view class="date-view">
-    <picker mode="date" value="{{date}}" start="{{date}}" bindchange="bindDateChange">
+    <picker mode="date" disabled="{{fromPage=='detail'?true: false}}"  value="{{date}}" start="{{date}}" bindchange="bindDateChange">
       <view class="picker">
         <text class="date-title">日期：</text>
         <view>
@@ -18,11 +18,11 @@
   <!-- 重复倒数 -->
   <view class="repeat-view">
     <view><text>重复倒数：</text></view>
-    <view><switch class="repeat-btn" color="#555" checked bindchange="switchChange"/></view>
+    <view><switch disabled="{{fromPage=='detail'?true: false}}"  class="repeat-btn" color="#555" checked="{{isRepeat ? true:false}}" bindchange="switchChange"/></view>
   </view>
   <!-- 重复周期 -->
   <view class="period-view {{isRepeat?'': 'is-norepeat'}}">
-    <picker disabled="{{isRepeat ? false : true}}" bindchange="bindLastPeriodChange" value="{{periodIndex}}" range="{{periodArr}}">
+    <picker disabled="{{(!isRepeat || fromPage=='detail') ? true : fasle}}" bindchange="bindLastPeriodChange" value="{{periodIndex}}" range="{{periodArr}}">
       <view class="picker">
         <text class="date-title">重复周期： </text>
         <view>
@@ -36,7 +36,7 @@
   <view class="des-view">
     <view class="des-title"><text>备注</text></view>
     <view class="des">
-      <textarea class="des-textarea" bindinput="bindDes" auto-height placeholder="输入备注说明" />
+      <textarea value="{{des}}" class="des-textarea" bindinput="bindDes" auto-height placeholder="输入备注说明" auto-focus="{{fromPage=='detail'?true: false}}"/>
     </view>
   </view>
   <!-- 按钮 -->

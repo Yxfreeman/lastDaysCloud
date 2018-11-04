@@ -9,7 +9,13 @@ Page({
     listData: null,
     backgroundColorArr: ['rgb(240, 95, 141)', 'rgb(249, 127, 121)', 'rgb(252, 190, 66)', 'rgb(177, 141, 220)', 'rgb(61, 201, 135)', 'rgb(67, 193, 201)', 'rgb(78, 177, 243)', 'rgb(130, 169, 218)', 'rgb(148, 127, 120)'],
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    navActive: 0,
+    navStyle: 'nav-view-absolute',
+    // 判断是否有正在倒数的数据
+    lasting: 0,
+    // 判断是否有已经倒数完的数据
+    lasted: 0
   },
 
   /**
@@ -30,7 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //读取缓存登录
+    //读取缓存刷新，是都是新增返回
     wx.getStorage({
       key: 'back',
       success: (res) => {
@@ -39,7 +45,7 @@ Page({
           wx.removeStorage({ key: 'back'});
         }
       }
-    })
+    });
   },
 
   /**
@@ -54,6 +60,17 @@ Page({
    */
   onUnload: function () {
   
+  },
+
+ /**
+   * 页面滑动事件
+   */
+  onPageScroll: function (e) {
+    if (e.scrollTop < 0) {
+      this.setData({ navStyle: 'nav-view-absolute' });
+    } else {
+      this.setData({ navStyle: '' });
+    }
   },
 
   /**
@@ -113,37 +130,39 @@ Page({
       if (res.result.errMsg === "collection.get:ok") {
         wx.stopPullDownRefresh();
         let listsData = [...res.result.data];
-        listsData.forEach((item, index) => {
-          item.isTouchMove = false;
-          item.inviteNumber = item.persons.length - 1;
-          const curDateTime = new Date();
-          const curYear = curDateTime.getFullYear();
-          const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
-          const curDay = String(curDateTime.getDate()).padStart(2, '0');
-          const dateArr = item.date.split("-");
-          if (item.periodIndex == 0) {
-            let compYear = curYear;
-            if ((curMon < dateArr[1]) || (curMon == dateArr[1] && curDay <= dateArr[2])) {
-              compYear = curYear;
-            } else {
-              compYear = curYear + 1;
-            }
-            item.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
-          } else if (item.periodIndex == 1) {
-            let compMon = curMon;
-            if (curDay <= dateArr[2]) {
-              compMon = curMon;
-            } else {
-              compMon = curMon + 1;
-            }
-            compMon = String(compMon).padStart(2, '0');
-            item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
-          }
-        });
+        // listsData.forEach((item, index) => {
+        //   item.isTouchMove = false;
+        //   item.inviteNumber = item.persons.length - 1;
+        //   const curDateTime = new Date();
+        //   const curYear = curDateTime.getFullYear();
+        //   const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
+        //   const curDay = String(curDateTime.getDate()).padStart(2, '0');
+        //   const dateArr = item.date.split("-");
+        //   if (item.periodIndex == 0) {
+        //     let compYear = curYear;
+        //     if ((parseInt(curMon) < dateArr[1]) || (parseInt(curMon) == dateArr[1] && parseInt(curDay) <= dateArr[2])) {
+        //       compYear = curYear;
+        //     } else {
+        //       compYear = curYear + 1;
+        //     }
+        //     item.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+        //   } else if (item.periodIndex == 1) {
+        //     let compMon = curMon;
+        //     if (parseInt(curDay) <= dateArr[2]) {
+        //       compMon = curMon;
+        //     } else {
+        //       compMon = curMon + 1;
+        //     }
+        //     compMon = String(compMon).padStart(2, '0');
+        //     item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+        //   }
+        // });
         this.setData({
-          listData: listsData.sort(function (a, b) {
+          listData: listsData.sort((a, b) => {
             return a.lastDays - b.lastDays;
-          })
+          }),
+          lasting: listsData.some((a) => a.isLasted === 0),
+          lasted: listsData.some((a) => a.isLasted === 1),
         });
       }
     }).catch((err) => {
@@ -197,6 +216,13 @@ Page({
   },
 
   /**
+   * nav点击
+   */
+  navTap: function (res) {
+    this.setData({ navActive: res.currentTarget.dataset.index});
+  },
+
+  /**
    * 到倒数提醒页面
    */
   toSetDay: function () {
@@ -216,7 +242,7 @@ Page({
       data: detail
     });
     wx.navigateTo({
-      url: '../dayDetail/dayDetail'
+      url: '../dayDetail/dayDetail?from=lasting'
     });
   },
 
@@ -263,7 +289,7 @@ Page({
     //更新数据
     that.setData({
       listData: that.data.listData
-    })
+    });
   },
 
   /**

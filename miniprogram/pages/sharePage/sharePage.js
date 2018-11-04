@@ -89,7 +89,7 @@ Page({
         const dateArr = dataDetail.date.split("-");
         if (dataDetail.periodIndex == 0) {
           let compYear = curYear;
-          if ((curMon < dateArr[1]) || (curMon == dateArr[1] && curDay <= dateArr[2])) {
+          if ((parseInt(curMon) < dateArr[1]) || (parseInt(curMon) == dateArr[1] && parseInt(curDay) <= dateArr[2]))  {
             compYear = curYear;
           } else {
             compYear = curYear + 1;
@@ -97,7 +97,7 @@ Page({
           dataDetail.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
         } else if (dataDetail.periodIndex == 1) {
           let compMon = curMon;
-          if (curDay <= dateArr[2]) {
+          if (parseInt(curDay) <= dateArr[2]) {
             compMon = curMon;
           } else {
             compMon = curMon + 1;

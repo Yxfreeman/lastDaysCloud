@@ -4,7 +4,7 @@ page{
 
 .list-model{
   font-size: 0;
-  padding-bottom: 40rpx;
+  min-height: 380rpx;
 }
 .list-model .title-view{
   position: relative;
@@ -12,12 +12,12 @@ page{
 .title-view .title {
   display: inline-block;
   width: 600rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   padding-top: 40rpx;
   padding-bottom: 30rpx;
-  padding-left: 30rpx;
-  font-size: 40rpx;
+  padding-left: 40rpx;
+  font-size: 44rpx;
   font-weight: 400;
   color: #fff;
   overflow:hidden;
@@ -34,33 +34,41 @@ page{
 
 .last-view {
   position: relative;
-  font-size: 32rpx;
+  font-size: 28rpx;
   text-align: center;
-  height: 150rpx;
+  height: 180rpx;
   color: #fff;
+  margin-bottom: 20rpx;
 }
 .last-view .left-text {
   position: absolute;
-  left: 30rpx;
-  height: 150rpx;
-  line-height: 150rpx;
+  left: 80rpx;
+  height: 180rpx;
+  line-height: 180rpx;
 }
 .last-view .right-text {
   position: absolute;
-  right: 30rpx;
-  height: 150rpx;
-  line-height: 150rpx;
+  right: 80rpx;
+  height: 180rpx;
+  line-height: 180rpx;
 }
 .last-view .center-text {
-  height: 150rpx;
-  line-height: 150rpx;
-  font-size: 88rpx;
+  height: 180rpx;
+  line-height: 180rpx;
+  font-size: 144rpx;
 }
 
 .des-view {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #fff;
-  padding: 10rpx 30rpx 0;
+  padding: 20rpx 40rpx 0px;
+}
+
+.des-center {
+  background-color: rgba(0,0,0,0.3);
+  padding: 30rpx 20rpx;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .invite-view{
@@ -85,11 +93,11 @@ page{
 
 .no-invite-view {
   padding: 160rpx 30rpx;
-  color: #999;
+  color: rgb(153, 153, 153);
   text-align: center;
 }
 .no-invite{
-  font-size: 32rpx;
+  font-size: 28rpx;
   line-height: 50rpx;
 }
 
@@ -113,4 +121,12 @@ page{
 
 .invite-btn::after{
   border: none;
+}
+
+.edit-view{
+  position: absolute;
+  top: 50rpx;
+  right: 40rpx;
+  font-size: 28rpx;
+  color: #fff;
 }

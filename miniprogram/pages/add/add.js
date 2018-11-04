@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listID: null,
     // 主题
     title: "",
     // 日期
@@ -18,7 +19,9 @@ Page({
     des: "",
     fromPage: "",
     // 默认重复倒数
-    isRepeat: 1
+    isRepeat: 1,
+    // 是否是初始创建者
+    isStartCreater: ''
   },
 
   /**
@@ -26,6 +29,25 @@ Page({
    */
   onLoad: function (options) {
     this.setData({fromPage: options.from});
+    if (options.from == "detail") {
+      //读取缓存登录
+      wx.getStorage({
+        key: 'dayDetail',
+        success: (res) => {
+          const dayDetail = res.data;
+          this.setData({
+            listID: dayDetail._id,
+            title: dayDetail.title,
+            date: dayDetail.date,
+            periodIndex: dayDetail.periodIndex,
+            des: dayDetail.des,
+            isRepeat: dayDetail.isRepeat,
+            isStartCreater: dayDetail.isStartCreater,
+            parentID: dayDetail.parentID
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -140,36 +162,83 @@ Page({
     const personInfo = app.globalData.personInfo;
     const that = this;
     wx.showLoading({mask: true});
-    wx.cloud.callFunction({
-      name: "add",
-      data: {
-        title: this.data.title,
-        date: this.data.date,
-        isRepeat: this.data.isRepeat,
-        periodIndex: this.data.periodIndex,
-        des: this.data.des,
-        createNickname: personInfo.nickName,
-        createAvatarUrl: personInfo.avatarUrl
-      }
-    }).then((res) => {
-      if (res.result.errMsg === "collection.add:ok") {
-        wx.hideLoading();
-        wx.showToast({
-          icon: "success",
-          title: "保存成功",
-          success: () => {
-            if (this.data.fromPage === "share") {
-              // 1秒后返回
-              that.timer = setTimeout(() => {
-                wx.reLaunch({
-                  url: "../index/index"
+    if (this.data.listID == null) {
+      wx.cloud.callFunction({
+        name: "add",
+        data: {
+          title: this.data.title,
+          date: this.data.date,
+          isRepeat: this.data.isRepeat,
+          periodIndex: this.data.periodIndex,
+          des: this.data.des,
+          createNickname: personInfo.nickName,
+          createAvatarUrl: personInfo.avatarUrl
+        }
+      }).then((res) => {
+        if (res.result.errMsg === "collection.add:ok") {
+          wx.hideLoading();
+          wx.showToast({
+            icon: "success",
+            title: "保存成功",
+            success: () => {
+              if (this.data.fromPage === "share") {
+                // 1秒后返回
+                that.timer = setTimeout(() => {
+                  wx.reLaunch({
+                    url: "../index/index"
+                  });
+                }, 1000);
+              } else {
+                // 1秒后返回
+                wx.setStorage({
+                  key: 'back',
+                  data: 'addPage'
                 });
-              }, 1000);
-            } else {
-              // 1秒后返回
-              wx.setStorage({
-                key: 'back',
-                data: 'addPage'
+                that.timer = setTimeout(() => {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }, 1000);
+              }
+            }
+          });
+        }
+      }).catch((err) => {
+        console.log(err)
+        wx.showToast({
+          icon: "none",
+          title: "错误"
+        });
+      });
+    } else {
+      wx.cloud.callFunction({
+        name: "update",
+        data: {
+          listID: this.data.parentID ? this.data.parentID:this.data.listID,
+          des: this.data.des,
+        }
+      }).then((res) => {
+        if (res.result.errMsg === "collection.update:ok") {
+          wx.hideLoading();
+          wx.showToast({
+            icon: "success",
+            title: "修改成功",
+            success: () => {
+              //读取缓存登录，然后重新缓存
+              wx.getStorage({
+                key: 'dayDetail',
+                success: (res) => {
+                  const dayDetail = res.data;
+                  dayDetail.des = this.data.des;
+                  wx.setStorage({
+                    key: 'dayDetail',
+                    data: dayDetail
+                  });
+                  wx.setStorage({
+                    key: 'back',
+                    data: 'addPage'
+                  });
+                }
               });
               that.timer = setTimeout(() => {
                 wx.navigateBack({
@@ -177,15 +246,15 @@ Page({
                 });
               }, 1000);
             }
-          }
+          });
+        }
+      }).catch((err) => {
+        console.log(err)
+        wx.showToast({
+          icon: "none",
+          title: "错误"
         });
-      }
-    }).catch((err) => {
-      console.log(err)
-      wx.showToast({
-        icon: "none",
-        title: "错误"
       });
-    });
+    }
   }
 })
