@@ -8,14 +8,17 @@
     <text>{{dataDetail.title}}</text>
   </view>
   <view class="last-view">
-    <text class="left-text">还有</text>
+    <text class="left-text">{{!dataDetail.isLasted?'还有':'共倒数'}}</text>
     <text class="center-text">{{dataDetail.lastDays}}</text>
     <text class="right-text">天</text>
   </view>
   <view class="des-view" wx:if="{{dataDetail.des}}">
     <view class="des-center"><text>{{dataDetail.des}}</text></view>
   </view>
-  <view class="no-invite-view" wx:if="{{!dataDetail.inviteNumber}}"><text class="no-invite">加入“{{dataDetail.title}}”\n和TA一起倒数这个日子！</text></view>
+  <view class="no-invite-view" wx:if="{{!dataDetail.inviteNumber}}">
+  <text wx:if="{{!dataDetail.isLasted}}" class="no-invite">加入“{{dataDetail.title}}”\n和TA一起倒数这个日子！</text>
+  <text wx:if="{{dataDetail.isLasted}}" class="no-invite">TA的倒数日结束了\n来创建属于自己的倒数日吧！</text>
+  </view>
   <view class="invite-view" wx:if="{{dataDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dataDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">
@@ -23,8 +26,8 @@
     </view>
   </view>
   <view class="buttons-view">
-    <button wx:if="{{!dataDetail.isJoin}}" class="join-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">加入倒数</button>
-    <button class="join-btn" wx:if="{{dataDetail.isJoin}}" bindtap="toHome">
+    <button wx:if="{{!dataDetail.isJoin&&!dataDetail.isLasted}}" class="join-btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">加入倒数</button>
+    <button class="join-btn" wx:if="{{dataDetail.isJoin||dataDetail.isLasted}}" bindtap="toHome">
       主页
     </button>
     <button class="add-btn" bindtap="toAdd">创建倒数日</button>

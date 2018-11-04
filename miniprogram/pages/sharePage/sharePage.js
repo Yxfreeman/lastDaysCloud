@@ -80,31 +80,31 @@ Page({
     }).then((res) => {
       if (res.result.errMsg === "document.get:ok") {
         let dataDetail = {...res.result.data};
-        dataDetail.inviteNumber = dataDetail.persons.length - 1;
-        dataDetail.isJoin = dataDetail.persons.some((item) => dataDetail.curOpenid === item.openid);
-        const curDateTime = new Date();
-        const curYear = curDateTime.getFullYear();
-        const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
-        const curDay = String(curDateTime.getDate()).padStart(2, '0');
-        const dateArr = dataDetail.date.split("-");
-        if (dataDetail.periodIndex == 0) {
-          let compYear = curYear;
-          if ((parseInt(curMon) < dateArr[1]) || (parseInt(curMon) == dateArr[1] && parseInt(curDay) <= dateArr[2]))  {
-            compYear = curYear;
-          } else {
-            compYear = curYear + 1;
-          }
-          dataDetail.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
-        } else if (dataDetail.periodIndex == 1) {
-          let compMon = curMon;
-          if (parseInt(curDay) <= dateArr[2]) {
-            compMon = curMon;
-          } else {
-            compMon = curMon + 1;
-          }
-          compMon = String(compMon).padStart(2, '0');
-          item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
-        }
+        // dataDetail.inviteNumber = dataDetail.persons.length - 1;
+        // dataDetail.isJoin = dataDetail.persons.some((item) => dataDetail.curOpenid === item.openid);
+        // const curDateTime = new Date();
+        // const curYear = curDateTime.getFullYear();
+        // const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
+        // const curDay = String(curDateTime.getDate()).padStart(2, '0');
+        // const dateArr = dataDetail.date.split("-");
+        // if (dataDetail.periodIndex == 0) {
+        //   let compYear = curYear;
+        //   if ((parseInt(curMon) < dateArr[1]) || (parseInt(curMon) == dateArr[1] && parseInt(curDay) <= dateArr[2]))  {
+        //     compYear = curYear;
+        //   } else {
+        //     compYear = curYear + 1;
+        //   }
+        //   dataDetail.lastDays = parseInt((new Date(`${compYear}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+        // } else if (dataDetail.periodIndex == 1) {
+        //   let compMon = curMon;
+        //   if (parseInt(curDay) <= dateArr[2]) {
+        //     compMon = curMon;
+        //   } else {
+        //     compMon = curMon + 1;
+        //   }
+        //   compMon = String(compMon).padStart(2, '0');
+        //   item.lastDays = parseInt((new Date(`${curYear}-${compMon}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
+        // }
         this.setData({ dataDetail: dataDetail});
       }
     }).catch((err) => {
