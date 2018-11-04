@@ -70,7 +70,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '倒数日',
+      // title: '倒数日',
       path: '/pages/sharePage/sharePage?dayID=' + this.data.dayDetail._id,
       success: function (res) {
         // 转发成功

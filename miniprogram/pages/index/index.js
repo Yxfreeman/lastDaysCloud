@@ -96,7 +96,7 @@ Page({
     if (res.from === 'button') {
       // 来自页面内转发按钮
       return {
-        title: '倒数日',
+        // title: '倒数日',
         path: '/pages/sharePage/sharePage?dayID=' + res.target.id,
         success: function (res) {
           // 转发成功

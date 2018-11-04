@@ -8,7 +8,7 @@
       </view>
       <view class="date-view"><text>{{dayDetail.date}}</text></view>
       <view class="last-view" bindtap="toDayDetail">
-        <text class="left-text">还有</text>
+        <text class="left-text">{{!dayDetail.isLasted?"还有":"共倒数"}}</text>
         <text class="center-text">{{dayDetail.lastDays}}</text>
         <text class="right-text">天</text>
       </view>

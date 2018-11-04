@@ -19,16 +19,16 @@ exports.main = async (event, context) => {
     // 2、对以上数据进行判断，若是重复倒数数据，则判断其有没有过期，过期的进行修改和新增操作
     for (let i = 0; i < dataLists.data.length; i++) {
       let item = dataLists.data[i];
+      const curDateTime = new Date();
+      const curYear = curDateTime.getFullYear();
+      const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
+      const curDay = String(curDateTime.getDate()).padStart(2, '0');
+      const dateArr = item.date.split("-");
+      const lastDays = parseInt((new Date(`${dateArr[0]}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
       // 判断是否重复倒数
       if (item.isRepeat) {
-        const curDateTime = new Date();
-        const curYear = curDateTime.getFullYear();
-        const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');
-        const curDay = String(curDateTime.getDate()).padStart(2, '0');
-        const dateArr = item.date.split("-");
         // 判断是否需要更新或是新增数据
         let isUpdate = 0;
-        const lastDays = parseInt((new Date(`${dateArr[0]}-${dateArr[1].padStart(2, '0')}-${dateArr[2].padStart(2, '0')}`).getTime() - new Date(`${curYear}-${curMon}-${curDay}`).getTime()) / (1000 * 60 * 60 * 24));
         if (item.periodIndex == 0) {// 按“年”重复倒数
           // 按年倒数，需要新增数据的
           if (lastDays < 0) {
@@ -84,6 +84,18 @@ exports.main = async (event, context) => {
               isStartCreater: item.isStartCreater
             }
           });
+        }
+      } else {
+        if (lastDays < 0) {
+          // 把到期的数据更新为：到期
+          await db.collection('dateLists').where({
+            _id: item._id
+          })
+            .update({
+              data: {
+                isLasted: 1
+              },
+            });
         }
       }
     }
