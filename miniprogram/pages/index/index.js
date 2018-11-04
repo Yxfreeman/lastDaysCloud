@@ -15,7 +15,9 @@ Page({
     // 判断是否有正在倒数的数据
     lasting: 0,
     // 判断是否有已经倒数完的数据
-    lasted: 0
+    lasted: 0,
+    // 回顾往日页面是否展示
+    isShow: false
   },
 
   /**
@@ -59,7 +61,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    clearTimeout(this.timer);
   },
 
  /**
@@ -219,7 +221,20 @@ Page({
    * nav点击
    */
   navTap: function (res) {
-    this.setData({ navActive: res.currentTarget.dataset.index});
+    const index = res.currentTarget.dataset.index;
+    if (index == 1) {
+      this.setData({ isShow: true });
+      this.timer = setTimeout(() => {
+        this.setData({ navActive: index });
+        clearTimeout(this.timer);
+      },300);
+    } else {
+      this.setData({ navActive: index });
+      this.timer = setTimeout(() => {
+        this.setData({ navActive: index });
+        this.setData({ isShow: false });
+      }, 300);
+    }
   },
 
   /**

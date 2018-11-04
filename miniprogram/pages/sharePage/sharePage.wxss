@@ -7,7 +7,7 @@ Page{
 .from-view{
   display: flex;
   align-items: center;
-  padding: 40rpx 30rpx;
+  padding: 40rpx 40rpx;
 }
 
 .from-view .from-icon{
@@ -34,45 +34,50 @@ Page{
 }
 
 .title-view{
-  font-size: 40rpx;
-  padding: 60rpx 30rpx 80rpx;
+  font-size: 52rpx;
+  padding: 60rpx 40rpx 80rpx;
   text-align: center
 }
 
 .des-view{
   padding: 80rpx 30rpx 0;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #fff;
+}
+.des-center{
+  padding: 30rpx 20rpx;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.3);
 }
 
 .last-view {
   position: relative;
-  font-size: 32rpx;
+  font-size: 28rpx;
   text-align: center;
   height: 150rpx;
   color: #fff;
 }
 .last-view .left-text {
   position: absolute;
-  left: 30rpx;
+  left: 80rpx;
   height: 150rpx;
   line-height: 150rpx;
 }
 .last-view .right-text {
   position: absolute;
-  right: 30rpx;
+  right: 80rpx;
   height: 150rpx;
   line-height: 150rpx;
 }
 .last-view .center-text {
   height: 150rpx;
   line-height: 150rpx;
-  font-size: 88rpx;
+  font-size: 144rpx;
 }
 
 .invite-view{
-  font-size: 32rpx;
+  font-size: 28rpx;
   color: #fff;
 }
 .invite-view .invite-number{
@@ -96,7 +101,7 @@ Page{
   text-align: center;
 }
 .no-invite{
-  font-size: 32rpx;
+  font-size: 28rpx;
   line-height: 50rpx;
 }
 

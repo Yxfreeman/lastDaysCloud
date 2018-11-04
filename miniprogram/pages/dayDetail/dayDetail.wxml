@@ -6,6 +6,7 @@
         <text class="title">{{dayDetail.title}}</text>
         <!-- <image class="notifications" mode="aspectFill" bindtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
       </view>
+      <view class="date-view"><text>{{dayDetail.date}}</text></view>
       <view class="last-view" bindtap="toDayDetail">
         <text class="left-text">还有</text>
         <text class="center-text">{{dayDetail.lastDays}}</text>
@@ -17,7 +18,8 @@
       <view wx:if="{{!dayDetail.isLasted && dayDetail.isStartCreater}}" class="edit-view" bindtap="editTap"><text>编辑</text></view>
     </view>
   </view>
-  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber}}"><text class="no-invite">空空如也\n可以邀请朋友一起来倒数！</text></view>
+  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber && !dayDetail.isLasted}}"><text class="no-invite">空空如也\n可以邀请朋友一起来倒数！</text></view>
+  <view class="no-invite-view" wx:if="{{!dayDetail.inviteNumber && dayDetail.isLasted}}"><text class="no-invite">空空如也\n没有邀请朋友一起来倒数哦！</text></view>
   <view class="invite-view" wx:if="{{dayDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dayDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">
@@ -25,7 +27,7 @@
     </view>    
   </view>
   <!-- 添加按钮 -->
-  <view class="invite-btn-view">
+  <view class="invite-btn-view" wx:if="{{!dayDetail.isLasted}}">
         <button style="background-color: {{backgroundColorArr[dayDetail.index%9]}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
     </view>
 </view>

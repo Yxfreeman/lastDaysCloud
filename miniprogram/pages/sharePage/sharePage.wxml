@@ -13,9 +13,9 @@
     <text class="right-text">天</text>
   </view>
   <view class="des-view" wx:if="{{dataDetail.des}}">
-    <text>{{dataDetail.des}}</text>
+    <view class="des-center"><text>{{dataDetail.des}}</text></view>
   </view>
-  <view class="no-invite-view" wx:if="{{!dataDetail.inviteNumber}}"><text class="no-invite">赶紧加入参与\n和“{{dataDetail.createNickname}}”一起倒数！</text></view>
+  <view class="no-invite-view" wx:if="{{!dataDetail.inviteNumber}}"><text class="no-invite">加入“{{dataDetail.title}}”\n和TA一起倒数这个日子！</text></view>
   <view class="invite-view" wx:if="{{dataDetail.inviteNumber}}">
     <view class="invite-number"><text>{{dataDetail.inviteNumber}}人一起倒数</text></view>
     <view class="invite-icons">

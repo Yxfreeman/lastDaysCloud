@@ -17,6 +17,7 @@
           <text class="title">{{item.title}}</text>
           <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
         </view>
+        <view class="date-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail"><text>{{item.date}}</text></view>
         <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
           <text class="left-text">还有</text>
           <text class="center-text">{{item.lastDays}}</text>
@@ -39,7 +40,7 @@
       </view>
     </view>
   </view>
-  <view class="lasted-view {{navActive==1?'active':''}}">
+  <view class="lasted-view {{navActive==1?'active':''}} {{isShow? '' :'hide' }}">
    <!-- 无数据展示 -->
     <view class="no-lists" wx:if="{{!listData|| !lasted}}">
       <text>空空如也\n日子还在倒数</text>
@@ -52,6 +53,7 @@
           <text class="title">{{item.title}}</text>
           <!-- <image class="notifications" mode="aspectFill" catchtap="toSetDay" src="../../images/ic_notifications_none.png"></image> -->
         </view>
+        <view class="date-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail"><text>{{item.date}}</text></view>
         <view class="last-view" data-index="{{index}}" data-detail="{{item}}" bindtap="toDayDetail">
           <text class="left-text">共倒数</text>
           <text class="center-text">{{item.lastDays}}</text>
@@ -63,9 +65,6 @@
             <image class="invite-icon" mode="aspectFill" src="{{person.avatarUrl?person.avatarUrl:'../../images/ic_account_circle.png'}}"></image>
           </view>
           <text class="invite-other">···</text>
-        </view>
-        <view class="invite-btn-view" wx:if="{{!item.inviteNumber}}">
-          <button id="{{item._id}}" class="invite-btn" hover-class="other-button-hover" open-type="share">邀请朋友一起倒数</button>
         </view>
       </view>
       <view class="delete-view" data-id="{{item._id}}" data-parentid="{{item.parentID}}"  catchtap="deleteTap">
