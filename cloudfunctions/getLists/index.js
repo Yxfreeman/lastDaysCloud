@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  // env: 'product-ff8906'
+  env: 'product-ff8906'
 });
 
 const db = cloud.database();
@@ -16,6 +16,7 @@ exports.main = async (event, context) => {
       isDelete: 0,
       isLasted: 0
     }).limit(100).get();
+    
     // 2、对以上数据进行判断，若是重复倒数数据，则判断其有没有过期，过期的进行修改和新增操作
     for (let i = 0; i < dataLists.data.length; i++) {
       let item = dataLists.data[i];

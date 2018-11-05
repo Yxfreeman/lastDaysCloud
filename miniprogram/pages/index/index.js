@@ -186,7 +186,7 @@ Page({
       confirmColor: "#999",
       success: (res) => {
         if (res.confirm) {
-          this.confirmDelete(event.currentTarget.dataset.id, event.currentTarget.dataset.parentid);
+          this.confirmDelete(event.currentTarget.dataset.id, event.currentTarget.dataset.parentid, event.currentTarget.dataset.islasted, event.currentTarget.dataset.isrepeat);
         }
       }
     });
@@ -195,12 +195,12 @@ Page({
   /**
    * 确认删除
    */
-  confirmDelete: function (id, parentID) {
+  confirmDelete: function (id, parentID, isLasted, isRepeat) {
     wx.cloud.callFunction({
       name: "delete",
-      data: { id: id, parentid: parentID}
+      data: { id: id, parentid: parentID, isLasted: isLasted, isRepeat: isRepeat}
     }).then((res) => {
-      if (res.result.errMsg === "collection.remove:ok") {
+      if (res.result.errMsg === "collection.remove:ok" || res.result.errMsg === "doc.update:ok") {
         wx.showToast({
           icon: "success",
           title: "删除成功",
