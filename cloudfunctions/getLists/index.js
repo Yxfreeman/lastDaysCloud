@@ -114,7 +114,7 @@ exports.main = async (event, context) => {
       }).limit(100).get();
       item.persons = personsData.data;
       item.isTouchMove = false;
-      item.inviteNumber = item.persons.length - 1;
+      item.inviteNumber = item.persons.length - 1 <= 0 ? 0 : item.persons.length - 1;
       const curDateTime = new Date();
       const curYear = curDateTime.getFullYear();
       const curMon = String(curDateTime.getMonth() + 1).padStart(2, '0');

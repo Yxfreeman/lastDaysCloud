@@ -19,7 +19,7 @@ exports.main = async (event, context) => {
     data.data.curOpenid = event.userInfo.openId;
     
     let dataDetail = data.data;
-    dataDetail.inviteNumber = dataDetail.persons.length - 1;
+    dataDetail.inviteNumber = data.data.persons.length - 1 <= 0 ? 0 : data.data.persons.length - 1;
     dataDetail.isJoin = dataDetail.persons.some((item) => dataDetail.curOpenid === item.openid);
     const curDateTime = new Date();
     const curYear = curDateTime.getFullYear();
