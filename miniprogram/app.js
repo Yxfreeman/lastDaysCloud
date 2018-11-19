@@ -54,6 +54,11 @@ App({
     });
   },
   onLaunch: function () {
+    wx.login({
+      success(res) {
+        console.log(res.code)
+      }
+    })
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -69,3 +74,6 @@ App({
     this.globalData = {}
   }
 })
+
+
+// 秘钥：f875eb68dd21ae25861c6cbda3d0cb7f

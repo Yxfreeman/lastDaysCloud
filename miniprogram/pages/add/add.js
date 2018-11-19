@@ -145,6 +145,7 @@ Page({
    */
   onGotUserInfo: function (res) {
     app.globalData.personInfo = res.detail.userInfo;
+    console.log(res.detail.userInfo)
     this.saveDays();
   },
 
