@@ -5,6 +5,8 @@
     <view class="line  {{navActive==1?'active':''}}"></view>
   </view>
   <view class="lasting-div {{navActive==0?'active':''}}">
+    <!-- 广告 -->
+    <ad unit-id="adunit-2c8ea2207df108e2"></ad>
     <!-- 无数据展示 -->
     <view class="no-lists" wx:if="{{!listData|| !lasting}}">
       <text>空空如也\n去创建一个日子开始倒数吧</text>
